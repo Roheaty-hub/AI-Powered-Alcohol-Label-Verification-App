@@ -1,0 +1,10 @@
+# One-click deploy on Render (https://render.com) using the Dockerfile.
+services:
+  - type: web
+    name: ttb-label-verifier
+    runtime: docker
+    plan: starter
+    healthCheckPath: /api/health
+    envVars:
+      - key: BATCH_WORKERS
+        value: "2"

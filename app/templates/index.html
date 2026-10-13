@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Label Verification</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <h1>Label Verification</h1>
+      <p class="tag">Prototype &middot; compares a label image to its application</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <nav class="tabs" role="tablist" aria-label="Mode">
+      <button role="tab" id="tab-single" aria-selected="true" aria-controls="panel-single">Check one label</button>
+      <button role="tab" id="tab-batch" aria-selected="false" aria-controls="panel-batch">Check many labels</button>
+    </nav>
+
+    <!-- ============ SINGLE ============ -->
+    <section id="panel-single" role="tabpanel" aria-labelledby="tab-single">
+      <div class="sample-bar">
+        <label for="sample-select">Try a sample label:</label>
+        <select id="sample-select"><option value="">Choose a sample…</option></select>
+      </div>
+
+      <form id="single-form" class="grid" novalidate>
+        <div class="card">
+          <h2><span class="step">1</span> Label image</h2>
+          <label class="drop" id="drop">
+            <input type="file" id="image" name="image" accept="image/png,image/jpeg,image/webp,image/tiff,image/bmp">
+            <img id="preview" alt="" hidden>
+            <span id="drop-text"><strong>Click to choose an image</strong><br>or drag it here (JPG or PNG)</span>
+          </label>
+        </div>
+
+        <div class="card">
+          <h2><span class="step">2</span> What the application says</h2>
+          <div class="field">
+            <label for="beverage_type">Beverage type</label>
+            <select id="beverage_type" name="beverage_type">
+              <option value="spirits">Distilled spirits</option>
+              <option value="wine">Wine</option>
+              <option value="beer">Beer / malt beverage</option>
+            </select>
+          </div>
+          <div class="field"><label for="brand_name">Brand name</label>
+            <input id="brand_name" name="brand_name" autocomplete="off" placeholder="e.g. OLD TOM DISTILLERY"></div>
+          <div class="field"><label for="class_type">Class / type</label>
+            <input id="class_type" name="class_type" autocomplete="off" placeholder="e.g. Kentucky Straight Bourbon Whiskey"></div>
+          <div class="row2">
+            <div class="field"><label for="alcohol_content">Alcohol content</label>
+              <input id="alcohol_content" name="alcohol_content" autocomplete="off" placeholder="e.g. 45%"></div>
+            <div class="field"><label for="net_contents">Net contents</label>
+              <input id="net_contents" name="net_contents" autocomplete="off" placeholder="e.g. 750 mL"></div>
+          </div>
+          <details class="optional">
+            <summary>More fields (optional)</summary>
+            <div class="field"><label for="bottler">Bottler / producer name and address</label>
+              <input id="bottler" name="bottler" autocomplete="off"></div>
+            <div class="field"><label for="country_of_origin">Country of origin (imports)</label>
+              <input id="country_of_origin" name="country_of_origin" autocomplete="off"></div>
+          </details>
+          <p class="hint">The government warning is always checked.</p>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="primary" id="check-btn">Check label</button>
+          <button type="button" class="secondary" id="clear-btn">Start over</button>
+        </div>
+      </form>
+
+      <div id="single-error" class="alert" role="alert" hidden></div>
+      <div id="single-result" aria-live="polite"></div>
+    </section>
+
+    <!-- ============ BATCH ============ -->
+    <section id="panel-batch" role="tabpanel" aria-labelledby="tab-batch" hidden>
+      <form id="batch-form" class="card" novalidate>
+        <h2><span class="step">1</span> Label images</h2>
+        <p class="hint">Select all the label images at once (you can select hundreds).</p>
+        <input type="file" id="batch-images" name="images" multiple accept="image/*" class="file-big">
+        <p id="batch-image-count" class="hint"></p>
+
+        <h2><span class="step">2</span> Application data (CSV)</h2>
+        <p class="hint">One row per label, matched by file name.
+          <a href="/api/batch-template.csv">Download the template</a>
+          &middot; <a href="/samples/batch_manifest.csv">Example file</a></p>
+        <input type="file" id="batch-manifest" name="manifest" accept=".csv,text/csv" class="file-big">
+
+        <div class="actions">
+          <button type="submit" class="primary" id="batch-btn">Check all labels</button>
+        </div>
+      </form>
+
+      <div id="batch-error" class="alert" role="alert" hidden></div>
+      <div id="batch-progress" hidden>
+        <div class="progress"><div class="bar" id="bar"></div></div>
+        <p id="progress-text" aria-live="polite"></p>
+      </div>
+      <div id="batch-result"></div>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    Automated checks assist review &mdash; the agent makes the final decision. Images are processed in memory and not stored.
+  </footer>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

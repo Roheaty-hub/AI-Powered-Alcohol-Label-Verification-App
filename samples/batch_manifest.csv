@@ -1,0 +1,10 @@
+filename,brand_name,class_type,alcohol_content,net_contents,bottler,country_of_origin,beverage_type,expected_outcome
+01_old_tom_pass.png,OLD TOM DISTILLERY,Kentucky Straight Bourbon Whiskey,45% Alc./Vol. (90 Proof),750 mL,"Bottled by Old Tom Distillery, Bardstown, Kentucky",,spirits,pass
+02_stones_throw_case_diff.png,Stone’s Throw,London Dry Gin,47%,750 mL,"Distilled and bottled by Stone's Throw Spirits, Portland, Oregon",,spirits,pass (brand differs only in case/punctuation)
+03_warning_title_case.png,OLD TOM DISTILLERY,Kentucky Straight Bourbon Whiskey,45% Alc./Vol. (90 Proof),750 mL,"Bottled by Old Tom Distillery, Bardstown, Kentucky",,spirits,fail (warning heading not all caps)
+04_wrong_abv.png,OLD TOM DISTILLERY,Kentucky Straight Bourbon Whiskey,45%,750 mL,"Bottled by Old Tom Distillery, Bardstown, Kentucky",,spirits,"fail (label 40%, application 45%)"
+05_warning_reworded.png,OLD TOM DISTILLERY,Kentucky Straight Bourbon Whiskey,45% Alc./Vol. (90 Proof),750 mL,"Bottled by Old Tom Distillery, Bardstown, Kentucky",,spirits,fail (warning wording altered)
+06_header_not_bold.png,OLD TOM DISTILLERY,Kentucky Straight Bourbon Whiskey,45% Alc./Vol. (90 Proof),750 mL,"Bottled by Old Tom Distillery, Bardstown, Kentucky",,spirits,review (warning heading not bold)
+07_photo_tilt_glare.jpg,OLD TOM DISTILLERY,Kentucky Straight Bourbon Whiskey,45% Alc./Vol. (90 Proof),750 mL,"Bottled by Old Tom Distillery, Bardstown, Kentucky",,spirits,pass or review (imperfect photo)
+08_imported_beer_units.png,HARBOR LIGHT,Pale Lager,5.2%,355 mL,"Imported by Harbor Light Imports, Seattle, Washington",Mexico,beer,"pass (application in mL, label in fl oz)"
+09_wrong_brand.png,OLD TIMER DISTILLING CO,Kentucky Straight Bourbon Whiskey,45% Alc./Vol. (90 Proof),750 mL,"Bottled by Old Tom Distillery, Bardstown, Kentucky",,spirits,fail (brand name mismatch)
